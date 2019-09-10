@@ -1,18 +1,27 @@
+
+td.userreport.cell.c1 {max-width: 65px; min-width: 65px;}
+td.userfield.useridnumber.cell.c2, th.header.userfield.useridnumber.cell.c1 {max-width: 75px; min-width: 75px;}
+.path-grade-report-grader .gradeitemheader {max-width: 80%;}
+.path-grade-report #maincontent + .urlselect {left: 550px;}
+div.header.userfield.useremail.cell.c1, div.header.userfield.useridnumber.cell.c1, div.header.cell.c0, .item.catlevel1, .courseitem.catlevel1, div.categoryitem, div.item.catlevel2, div.item.catlevel3, div.item.catlevel4, div.item.catlevel5, div.item.catlevel6 {top: 40px; white-space: normal !important;}
+.floater.sideonly.controls.floating {display:none;}
+
+
 /**
  * Container.
  */
-.path-grade-report-grader .gradeparent {
+.path-grade-report-gradest .gradeparent {
     position: relative;
 }
 
 /**
  * Tooltip and overlay.
  */
-.path-grade-report-grader .gradeparent .grader-information-tooltip {
+.path-grade-report-gradest .gradeparent .grader-information-tooltip {
     min-width: 200px;
 }
 
-.path-grade-report-grader .gradeparent .graderreportoverlay {
+.path-grade-report-gradest .gradeparent .graderreportoverlay {
     background-color: white;
     width: auto;
     padding: 10px;
@@ -24,7 +33,7 @@
 /**
  * The table.
  */
-.path-grade-report-grader .gradeparent table {
+.path-grade-report-gradest .gradeparent table {
     border: 1px solid #ccc;
     border-collapse: separate;
     border-spacing: 0;
@@ -36,69 +45,82 @@
 /**
  * All the cells.
  */
-.path-grade-report-grader .gradeparent .cell {
+.path-grade-report-gradest .gradeparent .cell {
     border: 1px solid #ccc;
     border-top-width: 0;
     border-left-width: 0;
-    padding: 4px 5px;
+    padding: 1px 5px;
     vertical-align: middle;
     text-align: right;
-    white-space: nowrap;
+    white-space: normal;
+    max-width: 100px;
+    min-width: 100px;
+    overflow: hidden;
+    text-align: center;
 }
 
 /**
  * Stripped table.
  */
-.path-grade-report-grader .gradeparent tr:nth-of-type(even) .cell {
+.path-grade-report-gradest .gradeparent tr:nth-of-type(even) .cell {
     background-color: #f9f9f9;
 }
 
 /**
  * All the floating divs.
  */
-.path-grade-report-grader .gradeparent .floater {
+.path-grade-report-gradest .gradeparent .floater {
     display: none;
 }
 
-.path-grade-report-grader .gradeparent .floating {
+.path-grade-report-gradest .gradeparent .floating {
     display: block;
 }
 
 /**
  * All the headers + floating cells.
  */
-.path-grade-report-grader .gradeparent .heading .cell,
-.path-grade-report-grader .gradeparent .avg .cell,
-.path-grade-report-grader .gradeparent .user.cell {
+.path-grade-report-gradest .gradeparent .heading .cell,
+.path-grade-report-gradest .gradeparent .avg .cell,
+.path-grade-report-gradest .gradeparent .user.cell {
     font-size: 14px;
     font-weight: normal;
+    text-align: center;
+}
+
+.path-grade-report-gradest .gradeparent .user.cell {
+    max-width: 230px;
+    min-width: 180px;
+}
+
+.path-grade-report-gradest .gradeparent .user.cell.c0 {
     text-align: left;
 }
 
 /**
  * All the floating cells.
  */
-.path-grade-report-grader .gradeparent .floater .cell {
+.path-grade-report-gradest .gradeparent .floater .cell {
     background-color: #f9f9f9;
 }
 
 /**
  * The user cells.
  */
-.path-grade-report-grader .gradeparent .user.cell {
+.path-grade-report-gradest .gradeparent .user.cell {
     min-width: 200px;
     width: 200px;
     white-space: normal;
     vertical-align: top;
 }
 
-.path-grade-report-grader .gradeparent .user.cell .userpicture {
+.path-grade-report-gradest .gradeparent .user.cell .userpicture {
     margin: 0 4px;
     border: none;
     vertical-align: middle;
 }
 
-.path-grade-report-grader .gradeitemheader {
+.path-grade-report-gradest .gradeitemheader {
     display: inline-block;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -106,71 +128,77 @@
     vertical-align: bottom;
 }
 
+.path-grade-report-gradest th, .path-grade-report-gradest th {
+    text-align: center;
+}
+
+
+
 /**
  * The additional user fields.
  */
-.path-grade-report-grader .gradeparent .userfield {
+.path-grade-report-gradest .gradeparent .userfield {
     font-weight: normal;
-    text-align: left;
+    text-align: center;
 }
 
 /**
  * The footer's header.
  */
-.path-grade-report-grader .gradeparent .range .header,
-.path-grade-report-grader .gradeparent .avg .header {
+.path-grade-report-gradest .gradeparent .range .header,
+.path-grade-report-gradest .gradeparent .avg .header {
     font-weight: bold;
 }
 
 /**
  * The footer's floating cells.
  */
-.path-grade-report-grader .gradeparent .avg.floating .cell {
+.path-grade-report-gradest .gradeparent .avg.floating .cell {
     border-top-width: 1px;
 }
 
 /**
  * The footer's cells.
  */
-.path-grade-report-grader .gradeparent .avg .cell {
+.path-grade-report-gradest .gradeparent .avg .cell {
     text-align: right;
 }
 /**
  * Content styling.
  */
-.path-grade-report-grader .gradeparent .heading .cell .iconsmall {
+.path-grade-report-gradest .gradeparent .heading .cell .iconsmall {
     /* Fixes inconsistencies in cell height on IE. */
     padding-top: 0;
     padding-bottom: 0;
 }
 
-.path-grade-report-grader .gradeparent .sorticon {
+.path-grade-report-gradest .gradeparent .sorticon {
     margin-left: 3px;
 }
 
-.path-grade-report-grader .gradeparent .gradevalue {
+.path-grade-report-gradest .gradeparent .gradevalue {
     display: inline-block;
 }
 
-.path-grade-report-grader span.gradepass {
+.path-grade-report-gradest span.gradepass {
     color: #298721;
 }
 
-.path-grade-report-grader span.gradefail {
+.path-grade-report-gradest span.gradefail {
     color: #890d0d;
 }
 
-.path-grade-report-grader .gradeparent tr:nth-child(n) td.overridden:nth-child(n) {
+.path-grade-report-gradest .gradeparent tr:nth-child(n) td.overridden:nth-child(n) {
     /* Made very specific to override the default stripped style of the table. */
     background-color: #efd9a4;
 }
 
-.path-grade-report-grader .gradeparent tr:nth-child(n) td.ajaxoverridden:nth-child(n) {
+.path-grade-report-gradest .gradeparent tr:nth-child(n) td.ajaxoverridden:nth-child(n) {
     /* Made very specific to override the default stripped style of the table. */
     background-color: #ffe3a0;
 }
 
-.path-grade-report-grader .gradeparent .excludedfloater {
+.path-grade-report-gradest .gradeparent .excludedfloater {
     font-weight: bold;
     color: red;
     font-size: 9px;
@@ -178,31 +206,27 @@
 }
 
 .path-grade-report .gradeparent .floater .controls.cell,
-.path-grade-report-grader .gradeparent .controls {
+.path-grade-report-gradest .gradeparent .controls {
     background-color: #f3ead8;
-}
-
-.path-grade-report-grader .gradeparent .category {
-    text-align: left;
 }
 
 /**
  * Editing fields.
  */
-.path-grade-report-grader .gradeparent select {
+.path-grade-report-gradest .gradeparent select {
     margin: 0;
     padding: 0;
 }
 
-.path-grade-report-grader .gradeparent .text {
+.path-grade-report-gradest .gradeparent .text {
     border: 1px solid #666;
-    width: auto;
+    width: 75px;
     margin: 0;
     padding: 0;
     text-align: center;
 }
 
-.path-grade-report-grader .gradeparent .quickfeedback {
+.path-grade-report-gradest .gradeparent .quickfeedback {
     border: 1px dashed #000;
     width: auto;
     margin: 0;
@@ -210,14 +234,14 @@
     margin-left: 10px;
 }
 
-.path-grade-report-grader .yui3-overlay {
+.path-grade-report-gradest .yui3-overlay {
     border: 0;
     background: none;
     background-color: inherit;
     min-width: 200px;
 }
 
-.path-grade-report-grader .yui3-overlay {
+.path-grade-report-gradest .yui3-overlay {
     background-color: white;
     width: auto;
     padding: 10px;
