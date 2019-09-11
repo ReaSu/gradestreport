@@ -2006,7 +2006,7 @@ class grade_report_gradest extends grade_report {
         }
 
         return $arrows;
-    }
+    } 
 
     /**
      * Returns the maximum number of students to be displayed on each page

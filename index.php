@@ -225,4 +225,8 @@ $event = \gradereport_gradest\event\grade_report_viewed::create(
 );
 $event->trigger();
 
+//stefan JS HACK for mockup
+echo '<script src="stefan.js">
+</script>';
+
 echo $OUTPUT->footer();
