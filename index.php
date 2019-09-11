@@ -42,6 +42,7 @@ $toggle_type   = optional_param('toggle_type', 0, PARAM_ALPHANUM);
 
 $graderreportsifirst  = optional_param('sifirst', null, PARAM_NOTAGS);
 $graderreportsilast   = optional_param('silast', null, PARAM_NOTAGS);
+$PAGE->requires->js_call_amd('gradereport_gradest/gradest','init');
 
 // The report object is recreated each time, save search information to SESSION object for future use.
 if (isset($graderreportsifirst)) {
@@ -224,5 +225,9 @@ $event = \gradereport_gradest\event\grade_report_viewed::create(
     )
 );
 $event->trigger();
+
+//stefan JS HACK for mockup
+echo '<script src="stefan.js">
+</script>';
 
 echo $OUTPUT->footer();

@@ -824,6 +824,7 @@ class grade_report_gradest extends grade_report {
         $strerror = get_string('error');
 
         $viewfullnames = has_capability('moodle/site:viewfullnames', $this->context);
+        $name = '';
 
         foreach ($this->gtree->get_levels() as $key => $row) {
             $headingrow = new html_table_row();
@@ -848,10 +849,12 @@ class grade_report_gradest extends grade_report {
 
                 if (!empty($element['depth'])) {
                     $catlevel = 'catlevel'.$element['depth'];
+                    if(!empty($element['children']) && !empty($element['categories'])) {
+
+                    }
                 } else {
                     $catlevel = '';
                 }
-
                 // Element is a filler
                 if ($type == 'filler' or $type == 'fillerfirst' or $type == 'fillerlast') {
                     $fillercell = new html_table_cell();
@@ -867,7 +870,10 @@ class grade_report_gradest extends grade_report {
                     if (grade_tree::can_output_item($element)) {
                         // Element is a category.
                         $categorycell = new html_table_cell();
-                        $categorycell->attributes['class'] = 'category ' . $catlevel;
+
+                        $name = clean_param($element['object']->get_name(), PARAM_ALPHANUMEXT);
+                        $courseheaderid = 'courseheader_' . $name;
+                        $categorycell->attributes['class'] = 'category ' . $catlevel . ' ' . $name;
                         $categorycell->colspan = $colspan;
                         $categorycell->text = $this->get_course_header($element);
                         $categorycell->header = true;
@@ -896,7 +902,7 @@ class grade_report_gradest extends grade_report {
                     $headericon = $this->gtree->get_element_header($element, false, true, false, false, true);
 
                     $itemcell = new html_table_cell();
-                    $itemcell->attributes['class'] = $type . ' ' . $catlevel . ' highlightable'. ' i'. $element['object']->id;
+                    $itemcell->attributes['class'] = $type . ' ' . $catlevel . ' highlightable'. ' i'. $element['object']->id . ' '. $name;
                     $itemcell->attributes['data-itemid'] = $element['object']->id;
 
                     if ($element['object']->is_hidden()) {
@@ -1113,6 +1119,7 @@ class grade_report_gradest extends grade_report {
                     } else if ($item->gradetype == GRADE_TYPE_TEXT) {
                         $itemcell->attributes['class'] .= ' grade_type_text';
                     }
+                    $itemcell->attributes['class'] .= ' ' . $name;
 
                     if ($item->scaleid && !empty($scalesarray[$item->scaleid])) {
                         $scale = $scalesarray[$item->scaleid];
@@ -1188,6 +1195,7 @@ class grade_report_gradest extends grade_report {
                     } else if ($item->gradetype == GRADE_TYPE_TEXT) {
                         $itemcell->attributes['class'] .= ' grade_type_text';
                     }
+                    $itemcell->attributes['class'] .= ' ' . $name;
 
                     // Only allow edting if the grade is editable (not locked, not in a unoverridable category, etc).
                     if ($enableajax && $grade->is_editable()) {
@@ -1657,27 +1665,29 @@ class grade_report_gradest extends grade_report {
 
             $url = new moodle_url($this->gpr->get_return_url(null, array('target' => $element['eid'], 'sesskey' => sesskey())));
 
-            if (in_array($element['object']->id, $this->collapsed['aggregatesonly'])) {
+
+
                 $url->param('action', 'switch_plus');
-                $icon = $OUTPUT->action_icon($url, new pix_icon('t/switch_plus', $strswitchplus), null, null);
-                $showing = get_string('showingaggregatesonly', 'grades');
-            } else if (in_array($element['object']->id, $this->collapsed['gradesonly'])) {
-                $url->param('action', 'switch_whole');
-                $icon = $OUTPUT->action_icon($url, new pix_icon('t/switch_whole', $strswitchwhole), null, null);
-                $showing = get_string('showinggradesonly', 'grades');
-            } else {
+            $locurl = str_replace('grader','gradest',$url);
+                $iconHide = $OUTPUT->action_icon('javascript:void(0)', new pix_icon('t/switch_plus', $strswitchplus), null, null);
+                $hiding = get_string('showingaggregatesonly', 'grades');
+
+
                 $url->param('action', 'switch_minus');
-                $icon = $OUTPUT->action_icon($url, new pix_icon('t/switch_minus', $strswitchminus), null, null);
+            $locurl = str_replace('grader','gradest',$url);
+                $icon = $OUTPUT->action_icon('javascript:void(0)', new pix_icon('t/switch_minus', $strswitchminus), null, null);
                 $showing = get_string('showingfullmode', 'grades');
-            }
+
         }
 
         $name = $element['object']->get_name();
         $courseheaderid = 'courseheader_' . clean_param($name, PARAM_ALPHANUMEXT);
-        $courseheader .= html_writer::tag('span', $name, array('id' => $courseheaderid,
+        $courseheader = html_writer::tag('span', $name, array('id' => $courseheaderid,
                 'title' => $name, 'class' => 'categoryitemheader'));
         $courseheader .= html_writer::label($showing, $courseheaderid, false, array('class' => 'accesshide'));
         $courseheader .= $icon;
+        $courseheader .= html_writer::label($hiding, $courseheaderid, false, array('class' => 'accesshide'));
+        $courseheader .= $iconHide;
 
         /*
         $courseheader .= '<br><span style="font-weight: normal;">(' . get_string('weight', 'grades') . ': ';
@@ -2006,7 +2016,7 @@ class grade_report_gradest extends grade_report {
         }
 
         return $arrows;
-    }
+    } 
 
     /**
      * Returns the maximum number of students to be displayed on each page
