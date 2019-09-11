@@ -19,7 +19,7 @@ define(['jquery'], function($) {
                     $('.item.catlevel2.highlightable.cell').css({
                         "writing-mode": "vertical-lr"
                     });
-                    $('.cell').not('.user, .userreport, .userfield').css({
+                    $('.cell').not('.user, .userreport, .userfield, .header').css({
                         "max-width": "40px",
                         "min-width": "40px"
                     });
@@ -27,7 +27,7 @@ define(['jquery'], function($) {
                     $('.item.catlevel2.highlightable.cell').css({
                         "writing-mode": "horizontal-tb",
                     });
-                    $('.cell').not('.user, .userreport, .userfield').css({
+                    $('.cell').not('.user, .userreport, .userfield, .header').css({
                         "max-width": "400px",
                         "min-width": "100px"
                     });
