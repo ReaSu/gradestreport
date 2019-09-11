@@ -1,42 +1,4 @@
 
-td.userreport.cell.c1 {
-    max-width: 65px;
-    min-width: 65px;
-}
-
-td.userfield.useridnumber.cell.c2,
-th.header.userfield.useridnumber.cell.c1 {
-    max-width: 75px;
-    min-width: 75px;
-}
-
-.path-grade-report-grader .gradeitemheader {
-    max-width: 80%;
-}
-
-.path-grade-report #maincontent + .urlselect {
-    left: 550px;
-}
-
-div.header.userfield.useremail.cell.c1,
-div.header.userfield.useridnumber.cell.c1,
-div.header.cell.c0,
-.item.catlevel1,
-.courseitem.catlevel1,
-div.categoryitem,
-div.item.catlevel2,
-div.item.catlevel3,
-div.item.catlevel4,
-div.item.catlevel5,
-div.item.catlevel6 {
-    top: 40px;
-    white-space: normal !important;
-}
-
-.floater.sideonly.controls.floating {
-    display: none;
-}
-
 
 /**
  * Container.
@@ -80,8 +42,9 @@ div.item.catlevel6 {
     border: 1px solid #ccc;
     border-top-width: 0;
     border-left-width: 0;
-    padding: 1px 5px;
+    padding: 3px;
     vertical-align: middle;
+    text-align: right;
     white-space: normal;
     max-width: 100px;
     min-width: 100px;
@@ -154,13 +117,15 @@ div.item.catlevel6 {
     display: inline-block;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 200px;
+    max-width: 90px;
     vertical-align: bottom;
+    white-space: nowrap;
 }
 
 .path-grade-report-gradest th {
     text-align: center;
 }
+
 
 
 /**

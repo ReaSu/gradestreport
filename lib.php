@@ -892,7 +892,8 @@ class grade_report_gradest extends grade_report {
                         $arrow = $this->get_sort_arrow('move', $sortlink);
                     }
 
-                    $headerlink = $this->gtree->get_element_header($element, true, $showactivityicons, false, false, true);
+                    $headerlink = $this->gtree->get_element_header($element, true, false, false, false, true);
+                    $headericon = $this->gtree->get_element_header($element, false, true, false, false, true);
 
                     $itemcell = new html_table_cell();
                     $itemcell->attributes['class'] = $type . ' ' . $catlevel . ' highlightable'. ' i'. $element['object']->id;
@@ -921,7 +922,12 @@ class grade_report_gradest extends grade_report {
                     }
 
                     $itemcell->colspan = $colspan;
-                    $itemcell->text = $headerlink . $arrow . $singleview;
+
+                    //get type icon only
+                    $headericon = substr($headericon, strpos($headericon, '<img'), 1000);
+                    $headericon = substr($headericon, 0, strpos($headericon, '>') + 1);
+
+                    $itemcell->text = $headericon . $arrow . $singleview . $headerlink;
                     $itemcell->header = true;
                     $itemcell->scope = 'col';
 
@@ -1648,7 +1654,7 @@ class grade_report_gradest extends grade_report {
 
         $name = $element['object']->get_name();
         $courseheaderid = 'courseheader_' . clean_param($name, PARAM_ALPHANUMEXT);
-        $courseheader = html_writer::tag('span', $name, array('id' => $courseheaderid,
+        $courseheader .= html_writer::tag('span', $name, array('id' => $courseheaderid,
                 'title' => $name, 'class' => 'gradeitemheader'));
         $courseheader .= html_writer::label($showing, $courseheaderid, false, array('class' => 'accesshide'));
         $courseheader .= $icon;
@@ -1963,4 +1969,3 @@ class grade_report_gradest extends grade_report {
         return $this->get_pref('studentsperpage');
     }
 }
-
