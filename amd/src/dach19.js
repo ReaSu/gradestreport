@@ -4,7 +4,7 @@ define(['jquery'], function($) {
         init: function() {
 
 
-             $(".cell.topleft.cell.c0").html('<select id="widthSelector"></select>');
+             $(".cell.topleft.cell.c0").html('<label for="widthSelector">Column Width:  </label><select id="widthSelector"></select>');
 
             $(document).ready(function() {
                 $("<option/>").val("wide").text("Standard").appendTo("#widthSelector");
