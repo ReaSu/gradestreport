@@ -926,8 +926,28 @@ class grade_report_gradest extends grade_report {
                     //get type icon only
                     $headericon = substr($headericon, strpos($headericon, '<img'), 1000);
                     $headericon = substr($headericon, 0, strpos($headericon, '>') + 1);
+/*
+                    $headericonsrc = substr($headericon, strpos($headericon, 'src="') + 5, 1000);
+                    $headericonsrc = substr($headericonsrc, 0, strpos($headericonsrc, '"'));
 
-                    $itemcell->text = $headericon . $arrow . $singleview . $headerlink;
+                    $itemcell->text = '<div style="width:80px; height:60px; position: absolute; margin-left: 15px; opacity:0.3;
+                    background-image:url(' . $headericonsrc . ');
+                    background-repeat: no-repeat; background-size: contain;"></div>
+                    ';
+                    */
+
+                    $itemcell->text .= $headericon . '<br><b>' . $headerlink . '</b>';
+/*
+                    $itemcell->text .= '<div class="d-flex"><div style="width:32px;">' . $headericon . '</div><div style="width:60px;">' . $arrow . $singleview;
+                    $itemcell->text .= '<a href="#empty"><i class="icon fa fa-gear" title="Edit" aria-label="Sort in descending order"></i></a>';
+                    $itemcell->text .= '<a href="#empty"><i class="icon fa fa-eye fa-fw sorticon" title="Hide grade" aria-label="Sort in descending order"></i></a>';
+                    $itemcell->text .= '</div></div>';
+                    */
+                    $itemcell->text .= '<br><a href="#" tabindex="0" class=" dropdown-toggle icon-no-margin" id="dropdown-2" aria-label="Edit" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" aria-controls="action-menu-2-menu">
+                            Edit
+                            <b class="caret"></b>
+                        </a>';
+                    //$itemcell->text = $headericonsrc;
                     $itemcell->header = true;
                     $itemcell->scope = 'col';
 
@@ -1655,9 +1675,37 @@ class grade_report_gradest extends grade_report {
         $name = $element['object']->get_name();
         $courseheaderid = 'courseheader_' . clean_param($name, PARAM_ALPHANUMEXT);
         $courseheader .= html_writer::tag('span', $name, array('id' => $courseheaderid,
-                'title' => $name, 'class' => 'gradeitemheader'));
+                'title' => $name, 'class' => 'categoryitemheader'));
         $courseheader .= html_writer::label($showing, $courseheaderid, false, array('class' => 'accesshide'));
         $courseheader .= $icon;
+
+        /*
+        $courseheader .= '<br><span style="font-weight: normal;">(' . get_string('weight', 'grades') . ': ';
+
+        $courseheader .= get_string('max', 'grades') . ': ';
+
+        $courseheader .= get_string('aggregationcoefextrasumabbr', 'grades');
+
+        $courseheader .= get_string('aggregation', 'grades') . ': ';
+        $courseheader .= ')</span>';
+        */
+
+        //HACK FOR MOCKUP
+        $courseheader .= '<br><div style="text-align: center;">';
+        $courseheader .= '
+                <div class="action-menu-trigger">
+                    <div class="dropdown">
+                        <a href="#" tabindex="0" class=" dropdown-toggle icon-no-margin" id="dropdown-2" aria-label="Edit" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" aria-controls="action-menu-2-menu">
+                            Edit
+                            <b class="caret"></b>
+                        </a>
+                    </div>
+                </div>'
+                ;
+        $courseheader .= '</div>';
+
+
+
 
         return $courseheader;
     }

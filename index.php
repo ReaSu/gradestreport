@@ -54,7 +54,6 @@ if (isset($graderreportsilast)) {
 $PAGE->set_url(new moodle_url('/grade/report/gradest/index.php', array('id'=>$courseid)));
 $PAGE->requires->yui_module('moodle-gradereport_gradest-gradereporttable', 'Y.M.gradereport_gradest.init', null, null, true);
 $PAGE->requires->js_call_amd('gradereport_gradest/dach19','init');
-
 // basic access checks
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
     print_error('invalidcourseid');

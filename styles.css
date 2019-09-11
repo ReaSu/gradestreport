@@ -1,4 +1,7 @@
-
+.path-grade-report-gradest #region-main {
+  overflow-x: visible;
+  border: none;
+}
 
 /**
  * Container.
@@ -23,11 +26,17 @@
     border-radius: 4px;
 }
 
+.path-grade-report-gradest .itemicon {
+  width: 32px;
+  height: 32px;
+  margin-top: 5px;
+}
+
 /**
  * The table.
  */
 .path-grade-report-gradest .gradeparent table {
-    border: 1px solid #ccc;
+    border: none;
     border-collapse: separate;
     border-spacing: 0;
     border-bottom-width: 0;
@@ -50,6 +59,11 @@
     min-width: 100px;
     overflow: hidden;
     text-align: center;
+}
+
+.path-grade-report-gradest .userreport.cell {
+  max-width: 1.5em;
+  min-width: 1.5em;
 }
 
 /**
@@ -120,6 +134,16 @@
     max-width: 90px;
     vertical-align: bottom;
     white-space: nowrap;
+}
+
+.path-grade-report-gradest .categoryitemheader {
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+    white-space: nowrap;
+    display: inline-block;
+    overflow: hidden;
+    font-size: 1.2em;
+    max-width: calc(100% - 40px);
 }
 
 .path-grade-report-gradest th {
