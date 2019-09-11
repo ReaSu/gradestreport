@@ -209,9 +209,10 @@ if ($USER->gradeediting[$course->id] && ($report->get_pref('showquickfeedback') 
 
 // prints paging bar at bottom for large pages
 if (!empty($studentsperpage)) {
-    echo '<div class="d-flex"><div class="p-1" style="margin-right: 10px;">' . get_string('studentsperpage', 'grades') . ': '.
+    echo '<div class="d-flex"><form><div class="p-1">' . get_string('studentsperpage', 'grades') . ': '.
     '<input class="studentsperpage" style="width: 40px; text-align: center;" type="text" value="' .
-    $report->get_numusers(true, true) . '"></input></div>';
+    $report->get_numusers(true, true) . '"></input>
+    <input style="margin-right: 10px; margin-left: 10px;" class="btn btn-secondary" type="submit" value="Submit"></form></div>';
     echo $OUTPUT->paging_bar($numusers, $report->page, $studentsperpage, $report->pbarurl);
     echo '</div>';
 }
