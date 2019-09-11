@@ -53,7 +53,7 @@ if (isset($graderreportsilast)) {
 
 $PAGE->set_url(new moodle_url('/grade/report/gradest/index.php', array('id'=>$courseid)));
 $PAGE->requires->yui_module('moodle-gradereport_gradest-gradereporttable', 'Y.M.gradereport_gradest.init', null, null, true);
-
+$PAGE->requires->js_call_amd('gradereport_gradest/dach19','init');
 // basic access checks
 if (!$course = $DB->get_record('course', array('id' => $courseid))) {
     print_error('invalidcourseid');
@@ -173,10 +173,14 @@ foreach ($warnings as $warning) {
 }
 
 $studentsperpage = $report->get_students_per_page();
+
 // Don't use paging if studentsperpage is empty or 0 at course AND site levels
-if (!empty($studentsperpage)) {
-    echo $OUTPUT->paging_bar($numusers, $report->page, $studentsperpage, $report->pbarurl);
-}
+echo '<div class="d-flex"><div class="p-1" style="margin-right: 10px;">' . get_string('studentsperpage', 'grades') . ': '.
+'<input class="studentsperpage" style="width: 40px; text-align: center;" type="text" value="' .
+$report->get_numusers(true, true) . '"></input></div>';
+echo $OUTPUT->paging_bar($numusers, $report->page, $studentsperpage, $report->pbarurl);
+echo '</div>';
+
 
 $displayaverages = true;
 if ($numusers == 0) {
@@ -204,8 +208,13 @@ if ($USER->gradeediting[$course->id] && ($report->get_pref('showquickfeedback') 
 }
 
 // prints paging bar at bottom for large pages
-if (!empty($studentsperpage) && $studentsperpage >= 20) {
+if (!empty($studentsperpage)) {
+    echo '<div class="d-flex"><form><div class="p-1">' . get_string('studentsperpage', 'grades') . ': '.
+    '<input class="studentsperpage" style="width: 40px; text-align: center;" type="text" value="' .
+    $report->get_numusers(true, true) . '"></input>
+    <input style="margin-right: 10px; margin-left: 10px;" class="btn btn-secondary" type="submit" value="Submit"></form></div>';
     echo $OUTPUT->paging_bar($numusers, $report->page, $studentsperpage, $report->pbarurl);
+    echo '</div>';
 }
 
 $event = \gradereport_gradest\event\grade_report_viewed::create(
@@ -215,5 +224,9 @@ $event = \gradereport_gradest\event\grade_report_viewed::create(
     )
 );
 $event->trigger();
+
+//stefan JS HACK for mockup
+echo '<script src="stefan.js">
+</script>';
 
 echo $OUTPUT->footer();
